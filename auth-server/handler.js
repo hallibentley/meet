@@ -48,7 +48,7 @@ module.exports.getAuthURL = async () => {
  *  scopes are the ones users will see when the consent screen is displayed to them.
  *
  */
-  const authURL = oAuth2Client.generateAuthUrl({
+  const authUrl = oAuth2Client.generateAuthUrl({
     access_type: "offline",
     scope: SCOPES,
   });
