@@ -6,6 +6,7 @@ import { extractLocations } from '../api';
 
 describe('<CitySearch /> component', () => {
   let locations, CitySearchWrapper;
+
   beforeAll(() => {
     locations = extractLocations(mockData);
     CitySearchWrapper = shallow(<CitySearch locations={locations} updateEvents={() => { }} />);
@@ -24,7 +25,7 @@ describe('<CitySearch /> component', () => {
     expect(CitySearchWrapper.find('.city').prop('value')).toBe(query);
   });
 
-  test('change state when text imput changes', () => {
+  test('change state when text input changes', () => {
     CitySearchWrapper.setState({
       query: 'Munich'
     });

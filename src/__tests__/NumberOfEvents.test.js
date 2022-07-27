@@ -4,6 +4,7 @@ import NumberOfEvents from '../NumberOfEvents';
 
 describe('<NumberOfEvents /> component', () => {
   let NumberOfEventsWrapper;
+
   beforeAll(() => {
     NumberOfEventsWrapper = shallow(<NumberOfEvents />)
   });
@@ -12,22 +13,17 @@ describe('<NumberOfEvents /> component', () => {
     expect(NumberOfEventsWrapper.find('#events-number')).toHaveLength(1);
   });
 
-  test('display number 10 for events by default', () => {
-    expect(NumberOfEventsWrapper.find('#events-number').get(0).props.value).toEqual(10);
+  test('render default number in the input as 32', () => {
+    expect(NumberOfEventsWrapper.find('#events-number').prop('value')).toBe(32);
   });
 
-  test('user can change the number of events', () => {
-    NumberOfEventsWrapper.find('#events-number').simulate('change', {
-      target: { value: 5 },
+  test('render change the number of events in input field by changing state', () => {
+    NumberOfEventsWrapper.setState({
+      numberOfEvents: 32
     });
-    expect(NumberOfEventsWrapper.state('numberOfEvents')).toEqual(5);
+    const eventObject = { target: { value: 6 } };
+    NumberOfEventsWrapper.find('#events-number').simulate('change', eventObject);
+    expect(NumberOfEventsWrapper.state('numberOfEvents')).toBe(6);
   });
-
-  // test('change NumberOfEvents state when number input changes', () => {
-  //   NumberOfEventsWrapper.setState({ NumberOfEvents: 10 });
-  //   NumberOfEventsWrapper.find('.number-of-events').simulate('change', { target: { value: 5 } });
-  //   expect(NumberOfEventsWrapper.state('numberOfEvents')).not.toEqual(undefined);
-  //   expect(NumberOfEventsWrapper.state('numberOfEvents')).toEqual(5);
-  // });
 
 });

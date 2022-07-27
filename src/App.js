@@ -11,7 +11,6 @@ class App extends Component {
   state = {
     events: [],
     locations: [],
-    numberOfEvents: 10
   }
 
   componentDidMount() {
@@ -24,34 +23,30 @@ class App extends Component {
     this.mounted = false;
   }
 
-  updateEvents = (location, eventCount) => {
-    if (eventCount === undefined) {
-      eventCount = this.state.numberOfEvents;
-    } else (
-      this.setState({ numberOfEvents: eventCount })
-    )
-    if (location === undefined) {
-      location = this.state.locations;
-    }
+  updateEvents = (location) => {
     getEvents().then((events) => {
-      const locationEvents = (location === 'all') ?
-        events :
-        events.filter((event) => event.location === location);
+      const locationEvents =
+        location === 'all'
+          ? events
+          : events.filter((event) => event.location === location);
       this.setState({
         events: locationEvents
       });
     });
-  }
+  };
 
   render() {
     return (
       <div className="App">
+        <div className="app-header">
+          <h1 className="app-title">Welcome to Meetup</h1>
+          <h2 className="app-subtitle">Enter location below: </h2>
+        </div>
         <CitySearch
           locations={this.state.locations}
           updateEvents={this.updateEvents} />
         <NumberOfEvents />
         <EventList events={this.state.events} />
-
       </div>
     );
   }
