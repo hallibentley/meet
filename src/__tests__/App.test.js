@@ -9,7 +9,6 @@ import { extractLocations, getEvents } from '../api';
 
 
 
-
 describe('<App /> component', () => {
   let AppWrapper;
 
