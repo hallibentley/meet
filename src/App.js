@@ -11,7 +11,8 @@ class App extends Component {
   state = {
     events: [],
     locations: [],
-    numberOfEvents: 32
+    numberOfEvents: 32,
+    currentLocation: 'all',
   }
 
   componentDidMount() {
@@ -43,6 +44,15 @@ class App extends Component {
     });
   };
 
+  updateNumberOfEvents = (numberOfEvents) => {
+    this.setState(
+      {
+        numberOfEvents,
+      },
+      this.updateEvents(this.state.currentLocation, numberOfEvents)
+    );
+  }
+
   render() {
     return (
       <div className="App">
@@ -56,7 +66,12 @@ class App extends Component {
         <NumberOfEvents
           updateEvents={this.updateEvents}
           numberOfEvents={this.state.numberOfEvents} />
-        <EventList events={this.state.events} />
+        <EventList
+          events={this.state.events}
+          updateNumberOfEvents={(number) => {
+            this.updateNumberOfEvents(number);
+          }}
+        />
       </div>
     );
   }
